@@ -1,0 +1,285 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 11.9
+-- Dumped by pg_dump version 11.9
+
+-- Started on 2020-09-13 12:11:43
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 200 (class 1259 OID 16444)
+-- Name: anio_escolar; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.anio_escolar (
+    id integer NOT NULL,
+    nombre character varying(100) NOT NULL,
+    anio character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.anio_escolar OWNER TO postgres;
+
+--
+-- TOC entry 198 (class 1259 OID 16434)
+-- Name: curso; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.curso (
+    id integer NOT NULL,
+    nombre character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.curso OWNER TO postgres;
+
+--
+-- TOC entry 201 (class 1259 OID 16449)
+-- Name: periodo_escolar; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.periodo_escolar (
+    id integer NOT NULL,
+    nombre character varying(500) NOT NULL,
+    anio_escolar integer NOT NULL,
+    tipo integer NOT NULL
+);
+
+
+ALTER TABLE public.periodo_escolar OWNER TO postgres;
+
+--
+-- TOC entry 197 (class 1259 OID 16429)
+-- Name: rol; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.rol (
+    id integer NOT NULL,
+    nombre character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public.rol OWNER TO postgres;
+
+--
+-- TOC entry 199 (class 1259 OID 16439)
+-- Name: salon; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.salon (
+    id integer NOT NULL,
+    nombre character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.salon OWNER TO postgres;
+
+--
+-- TOC entry 202 (class 1259 OID 16465)
+-- Name: tipo_periodo; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.tipo_periodo (
+    id integer NOT NULL,
+    nombre character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.tipo_periodo OWNER TO postgres;
+
+--
+-- TOC entry 196 (class 1259 OID 16424)
+-- Name: usuario; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.usuario (
+    id integer NOT NULL,
+    nombre character varying(100) NOT NULL,
+    dni "char" NOT NULL,
+    fecnac date NOT NULL,
+    rol integer
+);
+
+
+ALTER TABLE public.usuario OWNER TO postgres;
+
+--
+-- TOC entry 2847 (class 0 OID 16444)
+-- Dependencies: 200
+-- Data for Name: anio_escolar; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.anio_escolar (id, nombre, anio) FROM stdin;
+1	Año de ... 2018	2018
+2	Año de ... 2019	2019
+3	Año de ... 2020	2020
+\.
+
+
+--
+-- TOC entry 2845 (class 0 OID 16434)
+-- Dependencies: 198
+-- Data for Name: curso; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.curso (id, nombre) FROM stdin;
+1	Matemática
+2	Lenguaje
+3	Física
+4	Química
+5	Historia
+\.
+
+
+--
+-- TOC entry 2848 (class 0 OID 16449)
+-- Dependencies: 201
+-- Data for Name: periodo_escolar; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.periodo_escolar (id, nombre, anio_escolar, tipo) FROM stdin;
+1	1er Bimestre	1	1
+2	2do Bimestre	1	1
+\.
+
+
+--
+-- TOC entry 2844 (class 0 OID 16429)
+-- Dependencies: 197
+-- Data for Name: rol; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.rol (id, nombre) FROM stdin;
+1	Alumno
+2	Docente
+\.
+
+
+--
+-- TOC entry 2846 (class 0 OID 16439)
+-- Dependencies: 199
+-- Data for Name: salon; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.salon (id, nombre) FROM stdin;
+1	1er Grado
+2	2do Grado
+3	3er Grado
+4	4to Grado
+5	5to Grado
+6	6to Grado
+\.
+
+
+--
+-- TOC entry 2849 (class 0 OID 16465)
+-- Dependencies: 202
+-- Data for Name: tipo_periodo; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.tipo_periodo (id, nombre) FROM stdin;
+1	Bimestral
+2	Trimestral
+\.
+
+
+--
+-- TOC entry 2843 (class 0 OID 16424)
+-- Dependencies: 196
+-- Data for Name: usuario; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.usuario (id, nombre, dni, fecnac, rol) FROM stdin;
+2	Juan Pérez	7	1996-06-16	1
+3	José Calle	7	1986-07-10	2
+4	Vicente Arias	7	1990-07-05	1
+5	Carlos Palomino	2	1978-10-05	2
+1	Bryan Flores	7	1996-06-15	1
+\.
+
+
+--
+-- TOC entry 2717 (class 2606 OID 16448)
+-- Name: anio_escolar anio_escolar_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.anio_escolar
+    ADD CONSTRAINT anio_escolar_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2713 (class 2606 OID 16438)
+-- Name: curso curso_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.curso
+    ADD CONSTRAINT curso_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2719 (class 2606 OID 16456)
+-- Name: periodo_escolar periodo_escolar_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.periodo_escolar
+    ADD CONSTRAINT periodo_escolar_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2711 (class 2606 OID 16433)
+-- Name: rol rol_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.rol
+    ADD CONSTRAINT rol_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2715 (class 2606 OID 16443)
+-- Name: salon salon_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.salon
+    ADD CONSTRAINT salon_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2721 (class 2606 OID 16469)
+-- Name: tipo_periodo tipo_periodo_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tipo_periodo
+    ADD CONSTRAINT tipo_periodo_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2709 (class 2606 OID 16428)
+-- Name: usuario usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuario
+    ADD CONSTRAINT usuario_pkey PRIMARY KEY (id);
+
+
+-- Completed on 2020-09-13 12:11:43
+
+--
+-- PostgreSQL database dump complete
+--
+
