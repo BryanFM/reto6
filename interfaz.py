@@ -1,6 +1,7 @@
 from connection.conn import Connection
 from time import sleep
 from pprint import pprint
+import json
 
 c = Connection()
 def menu(c):
@@ -23,9 +24,29 @@ def menu(c):
         print('\t8 - Salir')
         opcion = input("> ")
         if opcion == "1":
-            mostrar_alumnos(c)
+            insert_usuario(c,2)
+        elif opcion == "2":
+            insert_usuario(c,1)
+        elif opcion == "3":
+            print("\nNo disponible")
+            sleep(2)
+            quit()
+        elif opcion == "4":
+            print("\nNo disponible")
+            sleep(2)
+            quit()
+        elif opcion == "5":
+            print("\nNo disponible")
+            sleep(2)
+            quit()
         elif opcion == "6":
-            mostrar_alumnos(c)
+            print("\nNo disponible")
+            sleep(2)
+            quit()
+        elif opcion == "7":
+            print("\nNo disponible")
+            sleep(2)
+            quit()
         elif opcion == "8":
             print("\nGracias por usar esta aplicación")
             sleep(2)
@@ -37,7 +58,22 @@ def menu(c):
 def continuar():
     pass
 
-def insert_usuario():
+def insert_usuario(c,rol):
+    nombre = input("\nIngresa su nombre > ")
+    dni = input("\nIngresa su N° DNI > ")
+    fecnac = input("\nIngresa su fecha de nacimiento > ")
+    #data = {"nombre": nombre,"dni": dni,"fecnac": fecnac,"rol": tipo}
+    sql = 'INSERT INTO public.usuario(nombre, dni, fecnac, rol) VALUES (%s,%s,%s,%s)'
+    insert = (nombre,dni,fecnac,rol)
+    cursor = c.cursor
+    cursor.execute(sql,insert)
+
+    c.commit()
+    #c.cursor.rowcount
+    rol = "Alumno"
+    if rol == 2:
+        rol = "Docente"
+    print(f'{rol} registrado exitosamente')
     pass
 
 def insert_catedras():
@@ -57,3 +93,5 @@ def mostrar_alumnos(c):
 
 def mostrar_notas():
     pass
+
+menu(c)
